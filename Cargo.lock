@@ -232,6 +232,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "dkls-go-ll"
+version = "1.0.0"
+dependencies = [
+ "ciborium",
+ "derivation-path",
+ "dkls23-ll",
+ "k256",
+ "rand",
+ "rand_chacha",
+ "serde",
+ "sl-mpc-mate",
+]
+
+[[package]]
 name = "dkls-wasm-ll"
 version = "1.0.1"
 dependencies = [

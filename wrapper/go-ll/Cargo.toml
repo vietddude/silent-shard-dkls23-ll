@@ -1,0 +1,23 @@
+[package]
+name = "dkls-go-ll"
+license = "SLL"
+version = "1.0.0"
+edition = "2021"
+
+[lib]
+name = "dkls_go_ll"
+crate-type = ["cdylib"]
+
+[dependencies]
+derivation-path.workspace = true
+rand_chacha.workspace = true
+dkls23-ll = { path = "../.." }
+sl-mpc-mate = { workspace = true }
+k256 = { workspace = true }
+rand = { workspace = true }
+ciborium = "0.2.1"
+serde = { version = "1", features = ["derive"] }
+
+[profile.release]
+lto = true
+opt-level = 'z'

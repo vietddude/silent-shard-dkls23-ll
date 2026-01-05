@@ -29,7 +29,7 @@ ciborium = "0.2.1"
 bincode = { version = "2.0.0-rc.3", features = ["serde"] }
 
 [workspace]
-members = [".", "wrapper/wasm-ll"]
+members = [".", "wrapper/wasm-ll", "wrapper/go-ll"]
 
 
 [workspace.dependencies]

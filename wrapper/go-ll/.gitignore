@@ -1,0 +1,11 @@
+target/
+Cargo.lock
+*.so
+*.dylib
+*.dll
+*.a
+
+# Go CGO build artifacts
+go/_obj/
+go/*.test
+go/*.exe

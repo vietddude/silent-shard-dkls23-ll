@@ -75,12 +75,12 @@ The library contains a small set of tests. Please look for usual Rust
 tests in src/dkg.rs and src/dsg.rs
  ### Εxamples (local unit tests with no communication)
 - Distributed Key Generation
-  `cargo test dkg::dkg2_out_of_2 // 2 parties and t=2`
-  `cargo test dkg::dkg2_out_of_3 // 3 parties and t=2`
+  `cargo test dkg::tests::dkg2_out_of_2 // 2 parties and t=2`
+  `cargo test dkg::tests::dkg2_out_of_3 // 3 parties and t=2`
 
 - Distributed Signatures:
-    `cargo test dsg::sign_2_out_of_2`
-    `cargo test dsg::sign_2_out_of_3`
+    `cargo test dsg::tests::sign_2_out_of_2`
+    `cargo test dsg::tests::sign_2_out_of_3`
 
 - Compute presignature only:
     Run the  `dsg::sign_2_out_of_*` without the last round:
