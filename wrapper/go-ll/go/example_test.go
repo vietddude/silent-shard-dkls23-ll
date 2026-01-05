@@ -34,8 +34,8 @@ func Example_basicFlow() {
 	msg4_0, _ := party0.HandleMessages(selectMessagesForParty(msg3_0, 0), commitments, nil)
 	msg4_1, _ := party1.HandleMessages(selectMessagesForParty(msg3_1, 1), commitments, nil)
 
-	party0.HandleMessages(msg4_1, nil, nil)
-	party1.HandleMessages(msg4_0, nil, nil)
+	_, _ = party0.HandleMessages(msg4_1, nil, nil)
+	_, _ = party1.HandleMessages(msg4_0, nil, nil)
 
 	// Step 3: Extract keyshares
 	share0, _ := party0.Keyshare()
@@ -69,8 +69,8 @@ func Example_basicFlow() {
 	msg3_0, _ = sign0.HandleMessages(selectMessagesForParty(msg2_0, 0), nil)
 	msg3_1, _ = sign1.HandleMessages(selectMessagesForParty(msg2_1, 1), nil)
 
-	sign0.HandleMessages(selectMessagesForParty(msg3_0, 0), nil)
-	sign1.HandleMessages(selectMessagesForParty(msg3_1, 1), nil)
+	_, _ = sign0.HandleMessages(selectMessagesForParty(msg3_0, 0), nil)
+	_, _ = sign1.HandleMessages(selectMessagesForParty(msg3_1, 1), nil)
 
 	last0, _ := sign0.LastMessage(messageHash)
 	last1, _ := sign1.LastMessage(messageHash)

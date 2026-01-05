@@ -1,0 +1,82 @@
+name: Go Wrapper CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'wrapper/go-ll/**'
+      - 'src/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/go-tests.yml'
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'wrapper/go-ll/**'
+      - 'src/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/go-tests.yml'
+
+
+jobs:
+  test:
+    name: Test Go Wrapper
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config
+
+      - name: Build Rust library
+        working-directory: wrapper/go-ll
+        run: |
+          cargo build --release
+          # Create symlink for CGO
+          mkdir -p target/release
+          ln -sf ../../target/release/libdkls_go_ll.so target/release/libdkls_go_ll.so
+
+      - name: Run Go tests
+        working-directory: wrapper/go-ll/go
+        env:
+          CGO_ENABLED: 1
+        run: |
+          go test -v ./...
+
+  lint:
+    name: Go Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: latest
+          working-directory: wrapper/go-ll/go
+          args: --timeout=5m
